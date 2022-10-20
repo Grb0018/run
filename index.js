@@ -1,5 +1,5 @@
 
-var vw = screen.availWidth/100;
+var vw = window.innerWidth/100;
 var block = ['./block/run3A.png','./block/run3B.png','./block/run3C.png','./block/run3D.png','./block/run3E.png']
 var getblock = block[Math.floor(Math.random() * 5)]
 var moveani = true;
@@ -39,7 +39,7 @@ document.getElementById('up').onclick=(e)=>{
     }
 }
 document.body.ontouchstart=()=>{
-    alert('start')
+
     if(runchk ==0){
         if(parseInt($('#character').css('left'))>6*vw){
             setTimeout(()=>{
@@ -48,7 +48,7 @@ document.body.ontouchstart=()=>{
         }
         runchk++;
          run = setInterval(()=>{
-            if(moveani == true){moveall()}
+            moveall()
             },20) 
     }
 }
