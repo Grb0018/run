@@ -1,175 +1,265 @@
-
-var vw = screen.availWidth/100;
-var block = ['./block/run3A.png','./block/run3B.png','./block/run3C.png','./block/run3D.png','./block/run3E.png']
-var getblock = block[Math.floor(Math.random() * 5)]
-var moveani = true;
-
-var run;
-var runchk = 0;
-document.addEventListener('keydown',(e)=>{
-if(e.key ==='ArrowRight'){  
-    if(runchk ==0){
-        if(parseInt($('#character').css('left'))>6*vw){
-            setTimeout(()=>{
-                $('#character').animate({left:'4vw'},500);
-            },1000)
-        }
-        runchk++;
-         run = setInterval(()=>{
-            if(moveani == true){moveall()}
-            },20) 
-    }
-  
+*{
+    padding:0;
+    margin:0;
+    image-rendering: -webkit-optimize-contrast;
 }
-})
-var jump = 0;
-document.getElementById('up').onclick=(e)=>{
-    if(jump==0){
-        coinchk();
-     jump++;
-    setTimeout(()=>{$('#character').css({left:'7vw',});
-},650)   
-    document.getElementById('character').style = 'animation:down 1000ms ease-in';
-    setTimeout(function(){$('#character').css({animation:'none'});
-    $('#character').css({
-        'background-image': 'url("./img file/f1.png")'
-    })
-    jump=0
-},700)
-    }
+body{
+    display: flex;
+    position: relative;
+    width:100%;
+    height: 100%;
+    margin:auto 0;
+    align-items: center;
+    overflow: hidden;
+    transition: 0.5s;
 }
-document.body.ontouchstart=()=>{
-    if(runchk ==0){
-        if(parseInt($('#character').css('left'))>6*vw){
-            setTimeout(()=>{
-                $('#character').animate({left:'4vw'},500);
-            },1000)
-        }
-        runchk++;
-         run = setInterval(()=>{
-            if(moveani == true){moveall()}
-            },20) 
-    }
+#gamediv{
+    width: 80vw;
+    height: 44vw;
+    background-color: black;
+    display: flex;
+    position: absolute;
+    overflow: hidden;
+    margin: 0 10vw;
 }
-document.addEventListener('keyup',(e)=>{
-    if(e.code === "Space"){
-        if(jump==0){
-            coinchk();
-         jump++;
-        setTimeout(()=>{$('#character').css({left:'7vw',});
-    },650)   
-        document.getElementById('character').style = 'animation:down 1000ms ease-in';
-        setTimeout(function(){$('#character').css({animation:'none'});
-        $('#character').css({
-            'background-image': 'url("./img file/f1.png")'
-        })
-        jump=0
-    },700)
-        }
-    }
-    if(e.key ==='ArrowRight'){ 
-        clearInterval(run);
-        runchk=0;
-        $('#character').css({
-            'background-image': 'url("./img file/f1.png")'
-        })
-    }
-
-})
-var touchchk;
-function touch(){
-  touchchk = setInterval(()=>{
-    cleft = parseInt($('#character').css('left')) + parseInt($('#character').css('width'))
-    var allblock = document.getElementsByClassName('block');
-    for (const x of allblock) {
-       var iteml = parseInt($(x).css('left')) + parseInt($('#runway').css('transform').split(',')[4]);
-       var characterl = parseInt($('#character').css('left')) + parseInt($('#character').css('width'));
-       var itemh = parseInt($(a[0]).css('bottom')) +  parseInt($(a[0]).css('height'));
-       var characterh = parseInt($('#character').css('transform').split(',')[5])
-        if(characterl > iteml+(vw*3.78) && iteml> (vw/3.07)){
-       if( -(vw*9) < characterh || parseInt($('#character').css('transform').split(',')[5])==0){
-             //   $('body').css('filter','hue-rotate(-60deg)')
-             //   setTimeout(()=>{$('body').css('filter','unset')},600)
-             console.log('touch')
-            }
-        }
-    }
-  },100)
+#idcloud{
+    position: absolute;
+    left: 0;
+    width: max-content;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    background: chocolate;
+    z-index: 1;
+    -webkit-transform :translate(0vw, 0vw)
+}
+#cloud1,#cloud{
+    width: 100vw;
+    bottom: 0;
 }
 
-touch()
+#idbg{
+    position: absolute;
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+    z-index: 2;
+    bottom: 2vw;
+    -webkit-transform :translate(0vw, 0vw)
+}
+#runway{
+    position: absolute;
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+    bottom: -1vw;
+    z-index: 3;
+    -webkit-transform :translate(0vw, 0vw)
+}
+#runway a{
+    width: 100vw;
+}
+#bg1{
+    width: 100vw;
+    bottom: 0;
+}
+#bg{
+    width: 100vw;
+    bottom: 0;
+}
+#g1{
+    position: absolute;
+    z-index: 2;
+    bottom: 0vw;
+    width: 101vw;
+    bottom: 0;
+}
+#g{
+    position: absolute;
+    z-index: 2;
+    bottom: 0vw;
+    width: 101vw;
 
+}
+#cac1{
+    position: absolute;
+    z-index: 2;
+    bottom: 8vw;
+    width: 100vw;
 
+}
+#cac{
+    position: absolute;
+    z-index: 2;
+    bottom: 8vw;
+    width: 100vw;
 
+}
+#fog1{
+    position: absolute;
+    width:102vw;
+    z-index: 3;
+    bottom: 9vw;
+    width: 100vw;
 
-/////////////  moving items /////////////////////////
-function moveall(){
-    moveani= false;
-    $('#character').css({
-        'background-image': 'url("./img file/run.gif")'
-    })
-
-    var lefty = parseInt($('#idcloud').css('-webkit-transform').split(',')[4]) - 0.1*vw
-    $('#idcloud').css({
-        '-webkit-transform': 'translate(' + lefty +'px, 0px)'
-    })
- 
-
-var leftybg = parseInt($('#idbg').css('-webkit-transform').split(',')[4]) - 0.25*vw
-$('#idbg').css({
-    '-webkit-transform': 'translate(' + leftybg +'px, 0px)'
-})
-
-
-var leftyrun = parseInt($('#runway').css('-webkit-transform').split(',')[4]) - 0.55*vw
-$('#runway').css({
-    '-webkit-transform': 'translate(' +leftyrun +'px, 0px)'
-})
-setTimeout(()=>{moveani=true})
+}
+#fog{
+    position: absolute;
+    width:102vw;
+    z-index: 3;
+    bottom: 9vw;
+    width: 100vw;
 }
 
-var a = document.getElementsByClassName('block')
-$(a[0].parentElement).css('left')
-
-///////////// coin check///////////////
-function coinchk(){
-    var startCoinChk = setInterval(()=>{
-        var allblock = document.getElementsByClassName('coin');
-        for (const x of allblock) {
-            var coinLeft = parseInt($(x).css('left')) + parseInt($('#runway').css('transform').split(',')[4]);
-            var coinWidth = parseInt($(x).css('left')) + parseInt($('#runway').css('transform').split(',')[4]) +  parseInt($(x).css('width'))
-            var characterLeft = parseInt($('#character').css('transform').split(',')[4]) + parseInt($('#character').css('width')) - 1.87*vw;
-            var characterTop = parseInt($('#character').css('transform').split(',')[5])
-            if(characterLeft>coinLeft && characterLeft<coinWidth){
-              if((vw*4.883)>characterTop<(vw*10.48)){
-                if($(x).attr('type') != 'no'){
-                    $(x).attr('type','no')
-                    $(x).animate({
-                        bottom:'20vw',
-                        width:'5.5vw',
-                    },700)
-                    setTimeout(()=>{
-                        $(x).remove();
-                    },700)
-                    var score = parseInt($('#scoreN').text())
-                    score  = score + 1
-                    $('#scoreN').text(score++)
-                }
-              }
-            }
-            
-        }
-    },200)
-    setTimeout(()=>{clearInterval(startCoinChk)},800)
-    
+#cacblock1{
+    position: absolute;
+    z-index: 5;
+    bottom: 5.5vw;
+    width: 10vw;
+    left: 73vw;
 }
-setInterval(()=>{
-    $('#score').css({
-        filter: 'brightness(1)',
-        transform: 'scale(1)'
-    })
-    $('#score').animate({
-        filter: 'brightness(1.3)',
-        transform: 'scale(1.1)'
-    },3000)
-},3000)
+
+#cacblock3{
+    position: absolute;
+    z-index: 5;
+    bottom: 5.5vw;
+    width: 10vw;
+    left: 178vw;
+}
+#cacblock2{
+    position: absolute;
+    z-index: 5;
+    bottom: 5.5vw;
+    width: 10vw;
+    left: 108vw;
+}
+#cacblock4{
+    position: absolute;
+    z-index: 5;
+    bottom: 5.5vw;
+    width: 10vw;
+    left: 328vw;
+}
+#cacblock5{
+    position: absolute;
+    z-index: 5;
+    bottom: 5.5vw;
+    width: 10vw;
+    left: 408vw;
+}
+#cacblock6{
+    position: absolute;
+    z-index: 5;
+    bottom: 5.5vw;
+    width: 10vw;
+    left: 658vw;
+}
+#cacblock7{
+    position: absolute;
+    z-index: 5;
+    bottom: 5.5vw;
+    width: 10vw;
+    left: 778vw;
+}
+#character{
+    position: absolute;
+    bottom: 5.5vw;
+    width: 6vw;
+    height: 8vw;
+    z-index: 5;
+    left: 20px;
+    background-image: url('./img file/f1.png');
+    background-size: 100% 100%;
+    -webkit-transform :translate(0vw, 0vw)
+}
+
+@keyframes down{
+    0%{ -webkit-transform :translate(0vw, -0.5vw);left:4vw;background-image: url(./img/jump/f1.png)}
+    1%{ -webkit-transform :translate(0vw, -1vw);left:4vw;background-image: url(./img/jump/f3.png)}
+    35%{-webkit-transform :translate(0vw, -13vw);left:5vw;background-image: url(./img/jump/f3.png)}
+    58%{-webkit-transform :translate(0vw,-9vw);left:5.6vw;background-image: url(./img/jump/f3.png)}
+    72%{-webkit-transform :translate(0vw, -2.2vw);left:6.2vw;background-image: url(./img/jump/f4.png)}
+    100%{-webkit-transform :translate(0vw, -0.5vw);left:7vw;background-image: url(./img/run.gif)}
+}
+@keyframes rot{
+    00%{transform: rotateY(70deg)}
+    50%{transform: rotateY(0deg)}
+100%{transform: rotateY(-70deg)}
+}
+.coin{
+    position: absolute;
+    z-index: 2;
+    bottom: 17vw;
+    width: 3.5vw;
+    animation: rot 2500ms linear infinite;
+    box-shadow: 0px 2vw 7vw 4px #ffe500;
+}
+#score{
+    position: absolute;
+    z-index: 1;
+    width: 4vw;
+    left: 4vw;
+    top: 2.55vw;
+    animation: glow 3000ms infinite;
+}
+#scoreN{
+    position: absolute;
+    z-index: 1;
+    width: 6vw;
+    left: 9.5vw;
+    font-family: system-ui;
+    top: 1.6vw;
+    font-size: 3.5vw;
+    color: gold;
+}
+@keyframes glow{
+    0%{filter: brightness(1);transform: scale(1);}
+    50%{filter: brightness(1.3);transform: scale(1.1)}
+    100%{filter: brightness(1);transform: scale(1)}
+}
+@keyframes bird{
+    0%{transform: translate(0vw, -0vw) rotateY(0deg); }
+    49%{transform: translate(100vw, -0vw) rotateY(0deg);}
+    50%{transform: translate(100vw, -0vw) rotateY(180deg); }
+    99%{transform: translate(0vw, 0vw) rotateY(180deg); }
+    100%{transform: translate(0vw, 0vw)rotateY(0deg); }
+}
+#bird{
+    position: relative;
+    z-index: 3;
+    width: 5vw;
+    top: -8vw;
+    left: 0vw;
+    animation: bird 10000ms linear infinite;
+}
+@keyframes opps{
+    0%{    filter: hue-rotate(0deg);}
+    100%{    filter: hue-rotate(-60deg);}
+}
+#up{
+    position: absolute;
+    width: 5vw;
+    left: 0.2vw;
+    top: 10vw;
+    box-shadow: 0px 2px 20px 2px #6a5a5a;
+    padding: 0.5vw;
+    z-index: 10;
+    border-radius: 5vw;
+    border-bottom-left-radius: 0px;
+}
+#lifeline{
+    display: flex;
+    position: absolute;
+    z-index: 10;
+    right: 5vw;
+    top: 2vw;
+    width: 8vw;
+    padding: 0.3vw 1.5vw;
+    border: 0.35vw solid #dfdfdf;
+    border-radius: 5vw;
+    justify-content: space-around;
+}
+#lifeline img{
+    width: 1.6vw;
+    height: 1.6vw;
+}
