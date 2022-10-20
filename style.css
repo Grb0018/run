@@ -31,7 +31,7 @@ body{
     flex-direction: row;
     background: chocolate;
     z-index: 1;
-    translate: 0px 0px;
+    -webkit-transform :translate(0vw, 0vw)
 }
 #cloud1,#cloud{
     width: 100vw;
@@ -45,7 +45,7 @@ body{
     flex-direction: row;
     z-index: 2;
     bottom: 2vw;
-    translate: 0px 0px;
+    -webkit-transform :translate(0vw, 0vw)
 }
 #runway{
     position: absolute;
@@ -54,7 +54,7 @@ body{
     flex-direction: row;
     bottom: -1vw;
     z-index: 3;
-    translate: 0px 0px;
+    -webkit-transform :translate(0vw, 0vw)
 }
 #runway a{
     width: 100vw;
@@ -170,16 +170,16 @@ body{
     left: 20px;
     background-image: url('./img file/f1.png');
     background-size: 100% 100%;
-    translate: 0 0vw;
+    -webkit-transform :translate(0vw, 0vw)
 }
 
 @keyframes down{
-    0%{ translate :0 -0.5vw;left:4vw;background-image: url(./img/jump/f1.png)}
-    1%{ translate :0 -1vw;left:4vw;background-image: url(./img/jump/f3.png)}
-    35%{translate :0 -13vw;left:5vw;background-image: url(./img/jump/f3.png)}
-    58%{translate :0 -9vw;left:5.6vw;background-image: url(./img/jump/f3.png)}
-    72%{translate :0 -2.2vw;left:6.2vw;background-image: url(./img/jump/f4.png)}
-    100%{translate :0 -0.5vw;left:7vw;background-image: url(./img/run.gif)}
+    0%{ -webkit-transform :translate(0vw, -0.5vw);left:4vw;background-image: url(./img/jump/f1.png)}
+    1%{ -webkit-transform :translate(0vw, -1vw);left:4vw;background-image: url(./img/jump/f3.png)}
+    35%{-webkit-transform :translate(0vw, -13vw);left:5vw;background-image: url(./img/jump/f3.png)}
+    58%{-webkit-transform :translate(0vw,-9vw);left:5.6vw;background-image: url(./img/jump/f3.png)}
+    72%{-webkit-transform :translate(0vw, -2.2vw);left:6.2vw;background-image: url(./img/jump/f4.png)}
+    100%{-webkit-transform :translate(0vw, -0.5vw);left:7vw;background-image: url(./img/run.gif)}
 }
 @keyframes rot{
     00%{transform: rotateY(70deg)}
@@ -197,9 +197,9 @@ body{
 #score{
     position: absolute;
     z-index: 1;
-    width: 6vw;
-    left: 2vw;
-    top: 2vw;
+    width: 4vw;
+    left: 4vw;
+    top: 2.55vw;
     animation: glow 3000ms infinite;
 }
 #scoreN{
@@ -209,7 +209,7 @@ body{
     left: 9.5vw;
     font-family: system-ui;
     top: 1.6vw;
-    font-size: 3.9vw;
+    font-size: 3.5vw;
     color: gold;
 }
 @keyframes glow{
@@ -218,11 +218,11 @@ body{
     100%{filter: brightness(1);transform: scale(1)}
 }
 @keyframes bird{
-    0%{translate: 0vw;transform: rotateY(0deg)}
-    49%{translate: 100vw;transform: rotateY(0deg)}
-    50%{translate: 100vw;transform: rotateY(180deg)}
-    99%{translate: 0vw;transform: rotateY(180deg)}
-    100%{translate: 0vw;transform: rotateY(0deg)}
+    0%{transform: translate(0vw, -0vw) rotateY(0deg); }
+    49%{transform: translate(100vw, -0vw) rotateY(0deg);}
+    50%{transform: translate(100vw, -0vw) rotateY(180deg); }
+    99%{transform: translate(0vw, 0vw) rotateY(180deg); }
+    100%{transform: translate(0vw, 0vw)rotateY(0deg); }
 }
 #bird{
     position: relative;
@@ -238,9 +238,28 @@ body{
 }
 #up{
     position: absolute;
-    width: 6vw;
-    left: 1.5vw;
-    top: 22vw;
-    box-shadow: 0px 2px 20px 2px lightgrey;
+    width: 5vw;
+    left: 0.2vw;
+    top: 10vw;
+    box-shadow: 0px 2px 20px 2px #6a5a5a;
     padding: 0.5vw;
+    z-index: 10;
+    border-radius: 5vw;
+    border-bottom-left-radius: 0px;
+}
+#lifeline{
+    display: flex;
+    position: absolute;
+    z-index: 10;
+    right: 5vw;
+    top: 2vw;
+    width: 8vw;
+    padding: 0.3vw 1.5vw;
+    border: 0.35vw solid #dfdfdf;
+    border-radius: 5vw;
+    justify-content: space-around;
+}
+#lifeline img{
+    width: 1.6vw;
+    height: 1.6vw;
 }
