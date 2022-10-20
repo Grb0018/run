@@ -89,7 +89,10 @@ function touch(){
        var characterh = parseInt($('#character').css('transform').split(',')[5])
         if(characterl > iteml+(vw*3.78) && iteml> (vw/3.07)){
        if( -(vw*9) < characterh || parseInt($('#character').css('transform').split(',')[5])==0){
-        crash()
+        if($(x).attr('no')=='true'){
+            crash()
+            $(x).attr('no','true')
+        }
             }
         }
     }
