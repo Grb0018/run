@@ -82,15 +82,15 @@ function touch(){
     cleft = parseInt($('#character').css('left')) + parseInt($('#character').css('width'))
     var allblock = document.getElementsByClassName('block');
     for (const x of allblock) {
-       var iteml = parseInt($(x).css('left')) + parseInt($('#runway').css('translate'));
+       var iteml = parseInt($(x).css('left')) + parseInt($('#runway').css('transform').split(',')[4]);
        var characterl = parseInt($('#character').css('left')) + parseInt($('#character').css('width'));
        var itemh = parseInt($(a[0]).css('bottom')) +  parseInt($(a[0]).css('height'));
-       var characterh = parseInt($('#character').css('translate').slice(4))
-        if(characterl > iteml+58 && iteml> (vw/3.07)){
-       if( -(vw*7.5) < characterh || isNaN(parseInt($('#character').css('translate').slice(4)))==true){
-               console.log('a')
-                $('body').css('filter','hue-rotate(-60deg)')
-                setTimeout(()=>{$('body').css('filter','unset')},600)
+       var characterh = parseInt($('#character').css('transform').split(',')[5])
+        if(characterl > iteml+(vw*3.78) && iteml> (vw/3.07)){
+       if( -(vw*9) < characterh || parseInt($('#character').css('transform').split(',')[5])==0){
+             //   $('body').css('filter','hue-rotate(-60deg)')
+             //   setTimeout(()=>{$('body').css('filter','unset')},600)
+             console.log('touch')
             }
         }
     }
@@ -109,21 +109,21 @@ function moveall(){
         'background-image': 'url("./img file/run.gif")'
     })
 
-    var lefty = parseInt($('#idcloud').css('translate')) - 0.1*vw
+    var lefty = parseInt($('#idcloud').css('-webkit-transform').split(',')[4]) - 0.1*vw
     $('#idcloud').css({
-        left: lefty +'px 0px'
+        '-webkit-transform': 'translate(' + lefty +'px, 0px)'
     })
  
 
-var leftybg = parseInt($('#idbg').css('translate')) - 0.25*vw
+var leftybg = parseInt($('#idbg').css('-webkit-transform').split(',')[4]) - 0.25*vw
 $('#idbg').css({
-    left: leftybg +'px 0px'
+    '-webkit-transform': 'translate(' + leftybg +'px, 0px)'
 })
- 
 
-var leftyrun = parseInt($('#runway').css('translate')) - 0.55*vw
+
+var leftyrun = parseInt($('#runway').css('-webkit-transform').split(',')[4]) - 0.55*vw
 $('#runway').css({
-    translate: leftyrun +'px 0px'
+    '-webkit-transform': 'translate(' +leftyrun +'px, 0px)'
 })
 setTimeout(()=>{moveani=true})
 }
@@ -136,10 +136,10 @@ function coinchk(){
     var startCoinChk = setInterval(()=>{
         var allblock = document.getElementsByClassName('coin');
         for (const x of allblock) {
-            var coinLeft = parseInt($(x).css('left')) + parseInt($('#runway').css('translate'));
-            var coinWidth = parseInt($(x).css('left')) + parseInt($('#runway').css('translate')) +  parseInt($(x).css('width'))
-            var characterLeft = parseInt($('#character').css('translate')) + parseInt($('#character').css('width')) - 1.87*vw;
-            var characterTop = parseInt($('#character').css('translate').slice(4))
+            var coinLeft = parseInt($(x).css('left')) + parseInt($('#runway').css('transform').split(',')[4]);
+            var coinWidth = parseInt($(x).css('left')) + parseInt($('#runway').css('transform').split(',')[4]) +  parseInt($(x).css('width'))
+            var characterLeft = parseInt($('#character').css('transform').split(',')[4]) + parseInt($('#character').css('width')) - 1.87*vw;
+            var characterTop = parseInt($('#character').css('transform').split(',')[5])
             if(characterLeft>coinLeft && characterLeft<coinWidth){
               if((vw*4.883)>characterTop<(vw*10.48)){
                 if($(x).attr('type') != 'no'){
