@@ -89,9 +89,7 @@ function touch(){
        var characterh = parseInt($('#character').css('transform').split(',')[5])
         if(characterl > iteml+(vw*3.78) && iteml> (vw/3.07)){
        if( -(vw*9) < characterh || parseInt($('#character').css('transform').split(',')[5])==0){
-             //   $('body').css('filter','hue-rotate(-60deg)')
-             //   setTimeout(()=>{$('body').css('filter','unset')},600)
-             console.log('touch')
+        crash()
             }
         }
     }
@@ -174,3 +172,21 @@ setInterval(()=>{
         transform: 'scale(1.1)'
     },3000)
 },3000)
+
+function crash(){
+    var a = document.getElementById('lifeline').children
+
+    if($(a[a.length-1]).css('filter')=='grayscale(1)'){
+     if($(a[a.length-2]).css('filter')=='grayscale(1)'){
+        if($(a[a.length-3]).css('filter')=='grayscale(1)'){
+            alert('Game Over')
+        }else{
+            $(a[a.length-3]).css('filter','grayscale(1)')
+        }
+     }else{
+        $(a[a.length-2]).css('filter','grayscale(1)')
+     }
+    }else{
+        $(a[a.length-1]).css('filter','grayscale(1)')
+    }
+}
