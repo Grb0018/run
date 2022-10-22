@@ -115,12 +115,12 @@ function touch(){
         if($(x).attr('no')!=='true'){
             crash()
             $(x).attr('no','true')
-            $('#screen').fadeIn(200)
+           document.body.style.backgroundColor= 'red'
             
             setTimeout(()=>{
                 document.getElementById('bgs').volume='0.6'
             document.getElementById('bgs1').volume='1';
-            $('#screen').fadeOut(600)
+            document.body.style.backgroundColor= 'white'
             },800)
         }
             }
