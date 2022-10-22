@@ -37,8 +37,8 @@ document.getElementById('up').onclick=(e)=>{
         document.getElementById('character').style = 'animation:down 1000ms ease-in';
         coinchk();
      jump++;
-    setTimeout(()=>{$('#character').css({left:'7vw',});
-},650)   
+     setTimeout(()=>{$('#character').css({left:'7vw',});
+    },980) 
     
     setTimeout(function(){$('#character').css({animation:'none'});
     $('#character').css({
@@ -83,7 +83,8 @@ document.addEventListener('keyup',(e)=>{
             coinchk();
          jump++;
         
-         
+         setTimeout(()=>{$('#character').css({left:'7vw',});
+    },700)
         document.getElementById('character').style = 'animation:down 1000ms ease-in';
         setTimeout(function(){$('#character').css({animation:'none'});
         $('#character').css({
