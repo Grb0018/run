@@ -51,6 +51,7 @@ document.getElementById('up').onclick=(e)=>{
 document.body.ontouchstart=()=>{
          run = setInterval(()=>{
             move()
+            touch()
             },0) 
             document.getElementById('bgs').volume='0.8' ;
             document.getElementById('bgs').volume='0.4'
@@ -64,6 +65,7 @@ document.body.ontouchstart=()=>{
 document.body.onclick=()=>{
     run = setInterval(()=>{
        move()
+       touch()
        },0) 
        document.getElementById('bgs').volume='0.8' ;
        document.getElementById('bgs').volume='0.4'
@@ -80,8 +82,8 @@ document.addEventListener('keyup',(e)=>{
         if(jump==0&& jumop==true){
             coinchk();
          jump++;
-        setTimeout(()=>{$('#character').css({left:'7vw',});
-    },650)   
+        
+         
         document.getElementById('character').style = 'animation:down 1000ms ease-in';
         setTimeout(function(){$('#character').css({animation:'none'});
         $('#character').css({
@@ -102,7 +104,6 @@ document.addEventListener('keyup',(e)=>{
 })
 var touchchk;
 function touch(){
-  touchchk = setInterval(()=>{
     cleft = parseInt($('#character').css('left')) + parseInt($('#character').css('width'))
     var allblock = document.getElementsByClassName('block');
     for (const x of allblock) {
@@ -115,21 +116,21 @@ function touch(){
         if($(x).attr('no')!=='true'){
             crash()
             $(x).attr('no','true')
-           document.body.style.backgroundColor= 'red'
+           //document.body.style.backgroundColor= 'red'
             
             setTimeout(()=>{
                 document.getElementById('bgs').volume='0.6'
             document.getElementById('bgs1').volume='1';
-            document.body.style.backgroundColor= 'white'
+          //  document.body.style.backgroundColor= 'white'
             },800)
         }
             }
         }
     }
-  },50)
+
 }
 
-touch()
+
 
 
 
