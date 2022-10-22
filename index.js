@@ -38,7 +38,7 @@ document.getElementById('up').onclick=(e)=>{
         coinchk();
      jump++;
      setTimeout(()=>{$('#character').css({left:'7vw',});
-    },980) 
+    },650) 
     
     setTimeout(function(){$('#character').css({animation:'none'});
     $('#character').css({
