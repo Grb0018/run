@@ -174,12 +174,12 @@ body{
 }
 
 @keyframes down{
-    0%{ transform :translate(4vw, -0.5vw);background-image: url(./img/jump/f1.png)}
-    1%{ transform :translate(4vw, -1vw);background-image: url(./img/jump/f3.png)}
-    35%{transform :translate(5vw, -13vw);background-image: url(./img/jump/f3.png)}
-    58%{transform :translate(5.6vw,-9vw);background-image: url(./img/jump/f3.png)}
-    72%{transform :translate(6.2vw, -2.2vw);background-image: url(./img/jump/f4.png)}
-    100%{transform :translate(7vw, -0.5vw);background-image: url(./img/run.gif)}
+    0%{ transform :translate(0vw, -0.5vw);left:4vw;background-image: url(./img/jump/f1.png)}
+    1%{ transform :translate(0vw, -1vw);left:4vw;background-image: url(./img/jump/f3.png)}
+    35%{transform :translate(0vw, -13vw);left:5vw;background-image: url(./img/jump/f3.png)}
+    58%{transform :translate(0vw,-9vw);left:5.6vw;background-image: url(./img/jump/f3.png)}
+    72%{transform :translate(0vw, -2.2vw);left:6.2vw;background-image: url(./img/jump/f4.png)}
+    100%{transform :translate(0vw, -0.5vw);left:7vw;background-image: url(./img/run.gif)}
 }
 @keyframes rot{
     00%{transform: rotateY(70deg)}
