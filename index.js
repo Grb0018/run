@@ -48,7 +48,7 @@ document.getElementById('up').onclick=(e)=>{
 },700)
     }
 }
-document.body.ontouchstart=()=>{
+document.getElementById('start').ontouchstart=()=>{
          run = setInterval(()=>{
             move()
             touch()
@@ -62,7 +62,7 @@ document.body.ontouchstart=()=>{
             document.getElementById('lose').play()
             document.getElementById('lose').pause()
 }
-document.body.onclick=()=>{
+document.getElementById('start').onclick=()=>{
     run = setInterval(()=>{
        move()
        touch()
