@@ -3,11 +3,11 @@ var vw = window.innerWidth/100;
 var block = ['./block/run3A.png','./block/run3B.png','./block/run3C.png','./block/run3D.png','./block/run3E.png']
 var getblock = block[Math.floor(Math.random() * 5)]
 var moveani = true;
-
+var jumop = true;
 var run;
 var runchk = 0;
-document.addEventListener('keydown',(e)=>{
-if(e.key ==='ArrowRight'){  
+
+function move(){  
     if(runchk ==0){
         if(parseInt($('#character').css('left'))>6*vw){
             setTimeout(()=>{
@@ -16,20 +16,30 @@ if(e.key ==='ArrowRight'){
         }
         runchk++;
          run = setInterval(()=>{
-            if(moveani == true){moveall()}
+            if(moveani == true&& -(810.48*vw)<parseInt($('#runway').css('transform').split(',')[4])){moveall()}
+            else if(parseInt($('#character').css('transform').split(',')[4])>(53.6*vw)){
+                clearInterval('run')
+                $('#character').fadeOut(150)
+                
+            }
+            else{moveani=false;jumop=false
+                var chl = parseInt($('#character').css('transform').split(',')[4])
+                $('#character').css('background-image','url(./img/run.gif)')
+                chl=chl+(0.5*vw)
+                $('#character').css('transform','translate('+chl+'px, 0px)')}
             },20) 
     }
-  
 }
-})
+
 var jump = 0;
 document.getElementById('up').onclick=(e)=>{
-    if(jump==0){
+    if(jump==0 && jumop==true){
+        document.getElementById('character').style = 'animation:down 1000ms ease-in';
         coinchk();
      jump++;
     setTimeout(()=>{$('#character').css({left:'7vw',});
 },650)   
-    document.getElementById('character').style = 'animation:down 1000ms ease-in';
+    
     setTimeout(function(){$('#character').css({animation:'none'});
     $('#character').css({
         'background-image': 'url("./img file/f1.png")'
@@ -39,22 +49,35 @@ document.getElementById('up').onclick=(e)=>{
     }
 }
 document.body.ontouchstart=()=>{
-
-    if(runchk ==0){
-        if(parseInt($('#character').css('left'))>6*vw){
-            setTimeout(()=>{
-                $('#character').animate({left:'4vw'},500);
-            },1000)
-        }
-        runchk++;
          run = setInterval(()=>{
-            moveall()
-            },20) 
-    }
+            move()
+            },0) 
+            document.getElementById('bgs').volume='0.8' ;
+            document.getElementById('bgs').volume='0.4'
+            document.getElementById('bgs').play()
+            document.getElementById('bgs1').play()
+            document.getElementById('coinSound').play()
+            document.getElementById('coinSound').pause()
+            document.getElementById('lose').play()
+            document.getElementById('lose').pause()
 }
+document.body.onclick=()=>{
+    run = setInterval(()=>{
+       move()
+       },0) 
+       document.getElementById('bgs').volume='0.8' ;
+       document.getElementById('bgs').volume='0.4'
+       document.getElementById('bgs').play()
+       document.getElementById('bgs1').play()
+       document.getElementById('coinSound').play()
+       document.getElementById('coinSound').pause()
+       document.getElementById('lose').play()
+       document.getElementById('lose').pause()
+}
+
 document.addEventListener('keyup',(e)=>{
     if(e.code === "Space"){
-        if(jump==0){
+        if(jump==0&& jumop==true){
             coinchk();
          jump++;
         setTimeout(()=>{$('#character').css({left:'7vw',});
@@ -84,19 +107,26 @@ function touch(){
     var allblock = document.getElementsByClassName('block');
     for (const x of allblock) {
        var iteml = parseInt($(x).css('left')) + parseInt($('#runway').css('transform').split(',')[4]);
-       var characterl = parseInt($('#character').css('left')) + parseInt($('#character').css('width'));
+       var characterl = parseInt($('#character').css('left')) + parseInt($('#character').css('width'))-(2*vw)
        var itemh = parseInt($(a[0]).css('bottom')) +  parseInt($(a[0]).css('height'));
        var characterh = parseInt($('#character').css('transform').split(',')[5])
         if(characterl > iteml+(vw*3.78) && iteml> (vw/3.07)){
        if( -(vw*9) < characterh || parseInt($('#character').css('transform').split(',')[5])==0){
-        if($(x).attr('no')=='true'){
+        if($(x).attr('no')!=='true'){
             crash()
             $(x).attr('no','true')
+            $('#screen').fadeIn(200)
+            
+            setTimeout(()=>{
+                document.getElementById('bgs').volume='0.6'
+            document.getElementById('bgs1').volume='1';
+            $('#screen').fadeOut(600)
+            },800)
         }
             }
         }
     }
-  },100)
+  },50)
 }
 
 touch()
@@ -140,19 +170,21 @@ function coinchk(){
         for (const x of allblock) {
             var coinLeft = parseInt($(x).css('left')) + parseInt($('#runway').css('transform').split(',')[4]);
             var coinWidth = parseInt($(x).css('left')) + parseInt($('#runway').css('transform').split(',')[4]) +  parseInt($(x).css('width'))
-            var characterLeft = parseInt($('#character').css('transform').split(',')[4]) + parseInt($('#character').css('width')) - 1.87*vw;
+            var characterLeft = parseInt($('#character').css('transform').split(',')[4]) + parseInt($('#character').css('width')) + 30 
             var characterTop = parseInt($('#character').css('transform').split(',')[5])
-            if(characterLeft>coinLeft && characterLeft<coinWidth){
-              if((vw*4.883)>characterTop<(vw*10.48)){
+            if(characterLeft+(1.5*vw)>coinLeft && characterLeft<coinWidth+(1.5*vw)){
+              if((vw*4.883)>characterTop && characterTop<(vw*10.48)){
                 if($(x).attr('type') != 'no'){
                     $(x).attr('type','no')
-                    $(x).animate({
-                        bottom:'20vw',
-                        width:'5.5vw',
-                    },700)
+                    $(x).css({
+                        transform:'translate(40vw, -20vw)',
+                        width:'8.5vw',
+                    })
+                    document.getElementById('coinSound').currentTime = 0;
+                    document.getElementById('coinSound').play()
                     setTimeout(()=>{
                         $(x).remove();
-                    },700)
+                    },300)
                     var score = parseInt($('#scoreN').text())
                     score  = score + 1
                     $('#scoreN').text(score++)
@@ -192,4 +224,8 @@ function crash(){
     }else{
         $(a[a.length-1]).css('filter','grayscale(1)')
     }
+            document.getElementById('lose').currentTime = '0'
+            document.getElementById('lose').play()
+            document.getElementById('bgs').volume='0.3'
+            document.getElementById('bgs1').volume='0.3'
 }
