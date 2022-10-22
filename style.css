@@ -31,7 +31,7 @@ body{
     flex-direction: row;
     background: chocolate;
     z-index: 1;
-    -webkit-transform :translate(0vw, 0vw)
+    transform :translate(0vw, 0vw)
 }
 #cloud1,#cloud{
     width: 100vw;
@@ -46,7 +46,6 @@ body{
     z-index: 2;
     bottom: 2vw;
     transform :translate(0vw, 0vw)
-    display:none;
 }
 #runway{
     position: absolute;
@@ -55,7 +54,7 @@ body{
     flex-direction: row;
     bottom: -1vw;
     z-index: 3;
-    -webkit-transform :translate(0vw, 0vw)
+    transform :translate(0vw, 0vw)
 }
 #runway a{
     width: 100vw;
@@ -171,7 +170,7 @@ body{
     left: 20px;
     background-image: url('./img file/f1.png');
     background-size: 100% 100%;
-    -webkit-transform :translate(0vw, 0vw)
+    transform :translate(0vw, 0vw)
 }
 
 @keyframes down{
