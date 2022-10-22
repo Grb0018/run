@@ -45,7 +45,8 @@ body{
     flex-direction: row;
     z-index: 2;
     bottom: 2vw;
-    -webkit-transform :translate(0vw, 0vw)
+    transform :translate(0vw, 0vw)
+    display:none;
 }
 #runway{
     position: absolute;
