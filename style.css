@@ -3,6 +3,14 @@
     margin:0;
     user-select: none;
 }
+#start{
+    border-radius: 50%;
+    position: absolute;
+    top:5vw;
+    width:max-content;
+    height: max-content;
+    padding:5vw;
+}
 body{
     display: flex;
     position: relative;
