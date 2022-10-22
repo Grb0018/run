@@ -49,7 +49,8 @@ document.getElementById('up').onclick=(e)=>{
     }
 }
 document.getElementById('start').ontouchstart=()=>{
-         run = setInterval(()=>{
+        alert('oo')
+        run = setInterval(()=>{
             move()
             touch()
             },0) 
