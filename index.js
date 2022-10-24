@@ -1,253 +1,116 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="./index.js" defer></script>
+    <script src="./jquery-3.5.1.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
+    <title>Escape Part 1</title>
+</head>
+<body>
 
-var vw = window.innerWidth/100;
-var block = ['./block/run3A.png','./block/run3B.png','./block/run3C.png','./block/run3D.png','./block/run3E.png']
-var getblock = block[Math.floor(Math.random() * 5)]
-var moveani = true;
-var jumop = true;
-var run;
-var runchk = 0;
-
-
-function move(){  
-    if(runchk ==0){
-        runchk++;
-         run = setInterval(()=>{
-            if(moveani == true&& -(810.48*vw)<parseInt($('#runway').css('transform').split(',')[4])){moveall()}
-            else if(parseInt($('#character').css('transform').split(',')[4])>(53.6*vw)){
-                clearInterval('run')
-                $('#character').fadeOut(150)
-                
-            }
-            else if(parseInt($('#runway').css('transform').split(',')[4])<(-810.48*vw)){moveani=false;jumop=false
-                var chl = parseInt($('#character').css('transform').split(',')[4])
-                $('#character').css('background-image','url(./img/run.gif)')
-                chl=chl+(0.5*vw)
-                $('#character').css('transform','translate('+chl+'px, 0px)')}
-            touch()
-            },20) 
-
-    }
-}
-
-var jump = 0;
-document.getElementById('up').onmousedown=(e)=>{
-    if(jump==0 && jumop==true){
-        document.getElementById('character').style = 'animation:down 1000ms ease-in';
-        coinchk();
-    jumop=false
-     jump++;
-    setTimeout(function(){$('#character').css({animation:'none'});
-    $('#character').css({
-        'background-image': 'url("./img/jump/f1.webp")'
-    })
-    jump=0
-    jumop=true
-    
-},700)
-    }
-}
-document.getElementById('ok').ontouchstart=()=>{
-    setTimeout(()=>{
-        run = setInterval(()=>{
-            move()
-            },0) 
-
-           
-    },1200)
-    $('#start').fadeOut('1100')
-    $('#gamediv').fadeIn('1100')
-    document.getElementById('bgs').volume='0.8' ;
-    document.getElementById('bgs').volume='0.4'
-    document.getElementById('bgs').play()
-    document.getElementById('bgs1').play()
-    document.getElementById('coinSound').play()
-    document.getElementById('coinSound').pause()
-    document.getElementById('lose').play()
-    document.getElementById('lose').pause()
-    document.getElementById('over').play()
-    document.getElementById('over').pause()
-    
-}
-document.getElementById('ok').onclick=()=>{
-    $('#start').fadeOut('1100')
-    $('#gamediv').fadeIn('1100')
-    setTimeout(()=>{
-        run = setInterval(()=>{
-            move()
-            },0) 
-           
-    },1200)
-    document.getElementById('bgs').volume='0.8' ;
-    document.getElementById('bgs').volume='0.4'
-    document.getElementById('bgs').play()
-    document.getElementById('bgs1').play()
-    document.getElementById('coinSound').play()
-    document.getElementById('coinSound').pause()
-    document.getElementById('lose').play()
-    document.getElementById('lose').pause()
-    
-}
-
-document.addEventListener('keyup',(e)=>{
-    if(e.code === "Space"){
-        if(jump==0&& jumop==true){
-            coinchk();
-         jump++;
-        
-        document.getElementById('character').style = 'animation:down 1000ms ease-in';
-        setTimeout(function(){$('#character').css({animation:'none'});
-        $('#character').css({
-            'background-image': 'url("./img/jump/f1.webp")'
-        })
-        jump=0
-    },700)
-        }
-    }
-    if(e.key ==='ArrowRight'){ 
-        clearInterval(run);
-        runchk=0;
-        $('#character').css({
-            'background-image': 'url("./img/jump/f1.webp")'
-        })
-    }
-
-})
-var touchchk;
-function touch(){
-    cleft = parseInt($('#character').css('left')) + parseInt($('#character').css('width'))
-    var allblock = document.getElementsByClassName('block');
-    for (const x of allblock) {
-       var iteml = parseInt($(x).css('left')) + parseInt($('#runway').css('transform').split(',')[4]);
-       var characterl = parseInt($('#character').css('left')) + parseInt($('#character').css('width'))-(2*vw)
-       var itemh = parseInt($(a[0]).css('bottom')) +  parseInt($(a[0]).css('height'));
-       var characterh = parseInt($('#character').css('transform').split(',')[5])
-        if(characterl > iteml+(vw*4.78) && iteml> (vw/3.07)){
-       if( -(vw*9) < characterh || parseInt($('#character').css('transform').split(',')[5])==0){
-        if($(x).attr('no')!=='true'){
-            crash()
-            $(x).attr('no','true')
-           //document.body.style.backgroundColor= 'red'
-            
-            setTimeout(()=>{
-                document.getElementById('bgs').volume='0.6'
-            document.getElementById('bgs1').volume='1';
-          //  document.body.style.backgroundColor= 'white'
-            },800)
-        }
-            }
-        }
-    }
-
-}
+    <div id="start" >ESCAPE <br><p style="font-size:2vw;    position: relative;
+        transform: translate(10px, -10vw);">(Part 1)</p> <button id="ok">Play Now</button></div>
+    <div id="screen"></div>
+    <audio src="./img file/bgs.mp3" id="bgs" loop></audio>
+    <audio src="./img file/bgs1.mp3" id="bgs1" loop></audio>
+    <audio src="./img file/coin.mp3" id="coinSound"></audio>
+    <audio src="./img file/loss.mp3" id="lose"></audio>
+    <audio src="./img file/gameOver.mp3" id="over"></audio>
+    <main id="gamediv">
+        <div id="lifeline">
+            <img src="./img file/life.png" alt="" srcset="">
+            <img src="./img file/life.png" alt="" srcset="">
+            <img src="./img file/life.png" alt="" srcset="">
+        </div>
+        <text id="up">Jump</text>
+        <div id="character"></div>
+        <div id="idcloud">
+            <img src="./img/run2a.webp" class="cloud"><img src="./img/run2a.webp" class="cloud1"><img src="./img/run2a.webp" class="cloud"><img src="./img/run2a.webp" class="cloud1"><img src="./img/run2a.webp" class="cloud"><img src="./img/run2a.webp" class="cloud1"><img src="./img/run2a.webp" class="cloud"><img src="./img/run2a.webp" class="cloud1">
+        </div>
+      
+         <div id="idbg">
+            <img src="./img/run2b.webp" id="bg"><img src="./img/run2b.webp" id="bg1"><img src="./img/run2b.webp" id="bg"><img src="./img/run2b.webp" id="bg1"><img src="./img/run2b.webp" id="bg"><img src="./img/run2b.webp" id="bg1"><img src="./img/run2b.webp" id="bg"><img src="./img/run2b.webp" id="bg1">
+        </div>
+        <img src="./img/coin.webp" id="score"><text id="scoreN">0</text>
+        <div id="runway">
+            <a style="left:0vw">
+                <img src="./img/run2c.webp" id="g">
+                <img src="./img/run2d.webp" id="cac">
+                <img src="./img/coin.webp" id="coin" style='left: 42vw;' class="coin">
+                <img src="./img/coin.webp" id="coin" style='left: 45vw;' class="coin">
+                <img src="./img/coin.webp" id="coin" style='left: 48vw;' class="coin">
+                <img src="./block/run3A.webp" id="cacblock1" class="block" style="filter: drop-shadow(2px 4px 6px #fff);">
+                <img src="./img/run2e.webp" id="fog">
+            </a>
+            <a style="left:100vw">
+                <img src="./img/run2c.webp" id="g">
+                <img src="./block/run3C.webp" id="cacblock3" class="block" style="filter: drop-shadow(2px 4px 6px #fff);" >
+                <img src="./img/run2d.webp" id="cac">
+                <img src="./img/run2e.webp" id="fog">
+                <img src="./block/run3C.webp" id="cacblock2" class="block" style="filter: drop-shadow(2px 4px 6px #fff);">
+                <img src="./img/coin.webp" id="coin" style='left: 185vw;' class="coin">
+                <img src="./img/coin.webp" id="coin" style='left: 188vw;' class="coin">
+                <img src="./img/coin.webp" id="coin" style='left:191vw;' class="coin">
+                <img src="./img/coin.webp" id="coin" style='left: 194vw;' class="coin">
+            </a>
+            <a style="left:200vw">
+                <img src="./img/run2c.webp" id="g">
+                <img src="./img/run2d.webp" id="cac">
+                <img src="./img/run2e.webp" id="fog">
+                <img src="./block/run3C.webp" id="cacblock3" class="block" style="filter: drop-shadow(2px 4px 6px #fff);">
+            </a>
+            <a style="left:300vw">
+                <img src="./img/run2c.webp" id="g">
+                <img src="./img/run2d.webp" id="cac">
+                <img src="./img/coin.webp" id="coin" style='left: 305vw;' class="coin">
+                <img src="./img/run2e.webp" id="fog">
+                <img src="./block/run3A.webp" id="cacblock4" class="block" style="filter: drop-shadow(2px 4px 6px #fff);">
+                <img src="./img file/bird.gif" id="bird">
+            </a>
+            <a style="left:400vw">
+                <img src="./img/run2c.webp" id="g">
+                <img src="./img/run2d.webp" id="cac">
+                <img src="./block/run3A.webp" id="cacblock5" class="block" style="filter: drop-shadow(2px 4px 6px #fff);">
+                <img src="./img/run2e.webp" id="fog">
+            </a>
+            <a style="left:500vw">
+                <img src="./img/run2c.webp" id="g">
+                <img src="./img/run2d.webp" id="cac">
+                <img src="./img/coin.webp" id="coin" style='left: 545vw;' class="coin">
+                <img src="./img/coin.webp" id="coin" style='left: 548vw;' class="coin">
+                <img src="./img/run2e.webp" id="fog">
+            </a>
+            <a style="left:600vw">
+                <img src="./img/run2c.webp" id="g"><img src="./img/coin.webp" id="coin" style='left: 630vw;' class="coin">
+                <img src="./img/coin.webp" id="coin" style='left: 618vw;' class="coin">
+                <img src="./img/run2d.webp" id="cac">
+                <img src="./block/run3C.webp" id="cacblock6" class="block" style="filter: drop-shadow(2px 4px 6px #fff);">
+                <img src="./img/run2e.webp" id="fog">
+            </a>
+            <a style="left:700vw">
+                <img src="./img/run2c.webp" id="g">
+                <img src="./block/run3C.webp" id="cacblock7" class="block" style="filter: drop-shadow(2px 4px 6px #fff);">
+                <img src="./img/run2d.webp" id="cac">
+                <img src="./img/coin.webp" id="coin" style='left: 745vw;' class="coin">
+                <img src="./img/coin.webp" id="coin" style='left: 708vw;' class="coin">
+                <img src="./img/run2e.webp" id="fog">
+            </a>
+            <a style="left:800vw">
+                <img src="./img/run2c.webp" id="g">
+                <img src="./img/run2d.webp" id="cac">
+                <img src="./img/run2e.webp" id="fog">
+                <img src="./img/cave1.webp" id="cave1">
+                <img src="./img/cave2.webp" id="cave2">
+            </a>
+        </div>
+         
 
 
-
-
-
-
-/////////////  moving items /////////////////////////
-function moveall(){
-    moveani= false;
-    $('#character').css({
-        'background-image': 'url("./img/run.gif")'
-    })
-
-    var lefty = parseInt($('#idcloud').css('-webkit-transform').split(',')[4]) - 0.1*vw
-    $('#idcloud').css({
-        '-webkit-transform': 'translate(' + lefty +'px, 0px)'
-    })
- 
-
-var leftybg = parseInt($('#idbg').css('-webkit-transform').split(',')[4]) - 0.25*vw
-$('#idbg').css({
-    '-webkit-transform': 'translate(' + leftybg +'px, 0px)'
-})
-
-
-var leftyrun = parseInt($('#runway').css('-webkit-transform').split(',')[4]) - 0.55*vw
-$('#runway').css({
-    '-webkit-transform': 'translate(' +leftyrun +'px, 0px)'
-})
-setTimeout(()=>{moveani=true})
-}
-
-var a = document.getElementsByClassName('block')
-$(a[0].parentElement).css('left')
-
-///////////// coin check///////////////
-function coinchk(){
-    var startCoinChk = setInterval(()=>{
-        var allblock = document.getElementsByClassName('coin');
-        for (const x of allblock) {
-            var coinLeft = parseInt($(x).css('left')) + parseInt($('#runway').css('transform').split(',')[4]);
-            var coinWidth = parseInt($(x).css('left')) + parseInt($('#runway').css('transform').split(',')[4]) +  parseInt($(x).css('width'))
-            var characterLeft = parseInt($('#character').css('transform').split(',')[4]) + parseInt($('#character').css('width')) + 30 
-            var characterTop = parseInt($('#character').css('transform').split(',')[5])
-            if(characterLeft+(1.5*vw)>coinLeft && characterLeft<coinWidth+(1.5*vw)){
-              if((vw*4.883)>characterTop && characterTop<(vw*10.48)){
-                if($(x).attr('type') != 'no'){
-                    $(x).attr('type','no')
-                    $(x).css({
-                        transform:'translate(40vw, -20vw)',
-                        width:'8.5vw',
-                    })
-                    document.getElementById('coinSound').currentTime = 0;
-                    document.getElementById('coinSound').play()
-                    setTimeout(()=>{
-                        $(x).remove();
-                    },300)
-                    var score = parseInt($('#scoreN').text())
-                    score  = score + 1
-                    $('#scoreN').text(score++)
-                }
-              }
-            }
-            
-        }
-    },200)
-    setTimeout(()=>{clearInterval(startCoinChk)},800)
-    
-}
-setInterval(()=>{
-    $('#score').css({
-        filter: 'brightness(1)',
-        transform: 'scale(1)'
-    })
-    $('#score').animate({
-        filter: 'brightness(1.3)',
-        transform: 'scale(1.1)'
-    },3000)
-},3000)
-
-function crash(){
-    var a = document.getElementById('lifeline').children
-
-    if($(a[a.length-1]).css('filter')=='grayscale(1)'){
-     if($(a[a.length-2]).css('filter')=='grayscale(1)'){
-        if($(a[a.length-3]).css('filter')=='grayscale(1)'){
-            clearInterval(run)
-            $('#character').css({
-                'background-image': 'url("./img/jump/f5.webp")'
-            })
-            document.getElementById('bgs').pause()
-            document.getElementById('bgs1').pause()
-            setTimeout(()=>{document.getElementById('over').play()},400)
-            $('#character').css('animation','over 2000ms linear')
-            setTimeout(()=>{
-                $('#character').css('transform','translate(0vw, 14vw)')
-            },1800)
-                
-        }else{
-            $(a[a.length-3]).css('filter','grayscale(1)')
-        }
-     }else{
-        $(a[a.length-2]).css('filter','grayscale(1)')
-     }
-    }else{
-        $(a[a.length-1]).css('filter','grayscale(1)')
-    }
-            document.getElementById('lose').currentTime = '0'
-            document.getElementById('lose').play()
-            document.getElementById('bgs').volume='0.3'
-            document.getElementById('bgs1').volume='0.3'
-}
+    </main>
+</body>
+</html>
