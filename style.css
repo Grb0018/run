@@ -176,17 +176,17 @@ body{
     height: 8vw;
     z-index: 5;
     left: 20px;
-    background-image: url('./img file/f1.png');
+    background-image: url('./img/jump/f1.webp');
     background-size: 100% 100%;
     transform :translate(0vw, 0vw)
 }
 
 @keyframes down{
-    0%{ transform :translate(0vw, -0.5vw);left:4vw;background-image: url(./img/jump/f1.png)}
-    1%{ transform :translate(0vw, -1vw);left:4vw;background-image: url(./img/jump/f3.png)}
-    35%{transform :translate(0vw, -13vw);left:5vw;background-image: url(./img/jump/f3.png)}
-    58%{transform :translate(0vw,-9vw);left:5.6vw;background-image: url(./img/jump/f3.png)}
-    72%{transform :translate(0vw, -2.2vw);left:6.2vw;background-image: url(./img/jump/f4.png)}
+    0%{ transform :translate(0vw, -0.5vw);left:4vw;background-image: url(./img/jump/f1.webp)}
+    1%{ transform :translate(0vw, -1vw);left:4vw;background-image: url(./img/jump/f3.webp)}
+    35%{transform :translate(0vw, -13vw);left:5vw;background-image: url(./img/jump/f3.webp)}
+    58%{transform :translate(0vw,-9vw);left:5.6vw;background-image: url(./img/jump/f3.webp)}
+    72%{transform :translate(0vw, -2.2vw);left:6.2vw;background-image: url(./img/jump/f4.webp)}
     100%{transform :translate(0vw, -0.5vw);left:7vw;background-image: url(./img/run.gif)}
 }
 @keyframes rot{
