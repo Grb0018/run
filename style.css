@@ -41,7 +41,7 @@ body{
     z-index: 1;
     transform :translate(0vw, 0vw)
 }
-#cloud1,#cloud{
+.cloud1,.cloud{
     width: 100vw;
     bottom: 0;
 }
@@ -260,7 +260,7 @@ body{
     border-radius: 5vw;
     font-size: 1.8vw;
     font-family: monospace;
-    padding: 6vw 4.2vw;
+    padding: 2vw 4.2vw;
     cursor: pointer;
     box-shadow: 0px 0px 2vw;
     border: 0.3vw solid;
