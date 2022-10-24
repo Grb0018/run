@@ -7,6 +7,7 @@ var jumop = true;
 var run;
 var runchk = 0;
 
+
 function move(){  
     if(runchk ==0){
         runchk++;
@@ -17,12 +18,14 @@ function move(){
                 $('#character').fadeOut(150)
                 
             }
-            else{moveani=false;jumop=false
+            else if(parseInt($('#runway').css('transform').split(',')[4])<(-810.48*vw)){moveani=false;jumop=false
                 var chl = parseInt($('#character').css('transform').split(',')[4])
                 $('#character').css('background-image','url(./img/run.gif)')
                 chl=chl+(0.5*vw)
                 $('#character').css('transform','translate('+chl+'px, 0px)')}
+            touch()
             },20) 
+
     }
 }
 
@@ -31,45 +34,58 @@ document.getElementById('up').onmousedown=(e)=>{
     if(jump==0 && jumop==true){
         document.getElementById('character').style = 'animation:down 1000ms ease-in';
         coinchk();
+    jumop=false
      jump++;
-     setTimeout(()=>{$('#character').css({left:'7vw',});
-    },650) 
-    
     setTimeout(function(){$('#character').css({animation:'none'});
     $('#character').css({
         'background-image': 'url("./img/jump/f1.webp")'
     })
     jump=0
+    jumop=true
+    
 },700)
     }
 }
-document.getElementById('start').ontouchstart=()=>{
-         run = setInterval(()=>{
+document.getElementById('ok').ontouchstart=()=>{
+    setTimeout(()=>{
+        run = setInterval(()=>{
             move()
-            touch()
             },0) 
-            document.getElementById('bgs').volume='0.8' ;
-            document.getElementById('bgs').volume='0.4'
-            document.getElementById('bgs').play()
-            document.getElementById('bgs1').play()
-            document.getElementById('coinSound').play()
-            document.getElementById('coinSound').pause()
-            document.getElementById('lose').play()
-            document.getElementById('lose').pause()
+
+           
+    },1200)
+    $('#start').fadeOut('1100')
+    $('#gamediv').fadeIn('1100')
+    document.getElementById('bgs').volume='0.8' ;
+    document.getElementById('bgs').volume='0.4'
+    document.getElementById('bgs').play()
+    document.getElementById('bgs1').play()
+    document.getElementById('coinSound').play()
+    document.getElementById('coinSound').pause()
+    document.getElementById('lose').play()
+    document.getElementById('lose').pause()
+    document.getElementById('over').play()
+    document.getElementById('over').pause()
+    
 }
-document.getElementById('start').onclick=()=>{
-    run = setInterval(()=>{
-       move()
-       touch()
-       },0) 
-       document.getElementById('bgs').volume='0.8' ;
-       document.getElementById('bgs').volume='0.4'
-       document.getElementById('bgs').play()
-       document.getElementById('bgs1').play()
-       document.getElementById('coinSound').play()
-       document.getElementById('coinSound').pause()
-       document.getElementById('lose').play()
-       document.getElementById('lose').pause()
+document.getElementById('ok').onclick=()=>{
+    $('#start').fadeOut('1100')
+    $('#gamediv').fadeIn('1100')
+    setTimeout(()=>{
+        run = setInterval(()=>{
+            move()
+            },0) 
+           
+    },1200)
+    document.getElementById('bgs').volume='0.8' ;
+    document.getElementById('bgs').volume='0.4'
+    document.getElementById('bgs').play()
+    document.getElementById('bgs1').play()
+    document.getElementById('coinSound').play()
+    document.getElementById('coinSound').pause()
+    document.getElementById('lose').play()
+    document.getElementById('lose').pause()
+    
 }
 
 document.addEventListener('keyup',(e)=>{
@@ -78,8 +94,6 @@ document.addEventListener('keyup',(e)=>{
             coinchk();
          jump++;
         
-         setTimeout(()=>{$('#character').css({left:'7vw',});
-    },700)
         document.getElementById('character').style = 'animation:down 1000ms ease-in';
         setTimeout(function(){$('#character').css({animation:'none'});
         $('#character').css({
@@ -107,7 +121,7 @@ function touch(){
        var characterl = parseInt($('#character').css('left')) + parseInt($('#character').css('width'))-(2*vw)
        var itemh = parseInt($(a[0]).css('bottom')) +  parseInt($(a[0]).css('height'));
        var characterh = parseInt($('#character').css('transform').split(',')[5])
-        if(characterl > iteml+(vw*3.78) && iteml> (vw/3.07)){
+        if(characterl > iteml+(vw*4.78) && iteml> (vw/3.07)){
        if( -(vw*9) < characterh || parseInt($('#character').css('transform').split(',')[5])==0){
         if($(x).attr('no')!=='true'){
             crash()
@@ -211,7 +225,18 @@ function crash(){
     if($(a[a.length-1]).css('filter')=='grayscale(1)'){
      if($(a[a.length-2]).css('filter')=='grayscale(1)'){
         if($(a[a.length-3]).css('filter')=='grayscale(1)'){
-            alert('Game Over')
+            clearInterval(run)
+            $('#character').css({
+                'background-image': 'url("./img/jump/f5.webp")'
+            })
+            document.getElementById('bgs').pause()
+            document.getElementById('bgs1').pause()
+            setTimeout(()=>{document.getElementById('over').play()},400)
+            $('#character').css('animation','over 2000ms linear')
+            setTimeout(()=>{
+                $('#character').css('transform','translate(0vw, 14vw)')
+            },1800)
+                
         }else{
             $(a[a.length-3]).css('filter','grayscale(1)')
         }
