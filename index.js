@@ -9,11 +9,6 @@ var runchk = 0;
 
 function move(){  
     if(runchk ==0){
-        if(parseInt($('#character').css('left'))>6*vw){
-            setTimeout(()=>{
-                $('#character').animate({left:'4vw'},500);
-            },1000)
-        }
         runchk++;
          run = setInterval(()=>{
             if(moveani == true&& -(810.48*vw)<parseInt($('#runway').css('transform').split(',')[4])){moveall()}
@@ -32,7 +27,7 @@ function move(){
 }
 
 var jump = 0;
-document.getElementById('up').onclick=(e)=>{
+document.getElementById('up').onmousedown=(e)=>{
     if(jump==0 && jumop==true){
         document.getElementById('character').style = 'animation:down 1000ms ease-in';
         coinchk();
@@ -42,15 +37,14 @@ document.getElementById('up').onclick=(e)=>{
     
     setTimeout(function(){$('#character').css({animation:'none'});
     $('#character').css({
-        'background-image': 'url("./img file/f1.png")'
+        'background-image': 'url("./img/jump/f1.webp")'
     })
     jump=0
 },700)
     }
 }
 document.getElementById('start').ontouchstart=()=>{
-        alert('oo')
-        run = setInterval(()=>{
+         run = setInterval(()=>{
             move()
             touch()
             },0) 
@@ -89,7 +83,7 @@ document.addEventListener('keyup',(e)=>{
         document.getElementById('character').style = 'animation:down 1000ms ease-in';
         setTimeout(function(){$('#character').css({animation:'none'});
         $('#character').css({
-            'background-image': 'url("./img file/f1.png")'
+            'background-image': 'url("./img/jump/f1.webp")'
         })
         jump=0
     },700)
@@ -99,7 +93,7 @@ document.addEventListener('keyup',(e)=>{
         clearInterval(run);
         runchk=0;
         $('#character').css({
-            'background-image': 'url("./img file/f1.png")'
+            'background-image': 'url("./img/jump/f1.webp")'
         })
     }
 
@@ -141,7 +135,7 @@ function touch(){
 function moveall(){
     moveani= false;
     $('#character').css({
-        'background-image': 'url("./img file/run.gif")'
+        'background-image': 'url("./img/run.gif")'
     })
 
     var lefty = parseInt($('#idcloud').css('-webkit-transform').split(',')[4]) - 0.1*vw
