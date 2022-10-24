@@ -218,7 +218,7 @@ body{
     z-index: 2;
     bottom: 17vw;
     width: 3.5vw;
-    animation: rot 2500ms linear infinite;
+   /* animation: rot 2500ms linear infinite; */
     box-shadow: 0px 2vw 7vw 4px #ffe500;
     background: #f9d93a38;
     display: block;
