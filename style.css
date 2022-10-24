@@ -242,7 +242,8 @@ body{
     width: 5vw;
     top: -8vw;
     left: 0vw;
-    animation: bird 10000ms linear infinite;
+   /* animation: bird 10000ms linear infinite; */
+    display:none;
 }
 @keyframes opps{
     0%{    filter: hue-rotate(0deg);}
