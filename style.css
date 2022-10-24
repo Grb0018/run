@@ -6,10 +6,23 @@
 #start{
     border-radius: 50%;
     position: absolute;
-    top:5vw;
-    width:max-content;
-    height: max-content;
-    padding:5vw;
+    top: 5vw;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Caveat', cursive;
+    font-size: 8vw;
+    color: #563904;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+#start button{
+    font-family: 'Caveat', cursive;
+    background: transparent;
+    border: 0;
+    font-size: 3vw;
+    transform: translate(10px, -10vw);
 }
 body{
     display: flex;
@@ -20,15 +33,19 @@ body{
     align-items: center;
     overflow: hidden;
     transition: 0.5s;
+    background-image: url(./img/2833188.jpg);
+    background-size: contain;
+    background-size: 100vw 90vh;
 }
 #gamediv{
     width: 80vw;
     height: 44vw;
     background-color: black;
-    display: flex;
+    display: none;
     position: absolute;
     overflow: hidden;
     margin: 0 10vw;
+    
 }
 #idcloud{
     position: absolute;
@@ -42,8 +59,9 @@ body{
     transform :translate(0vw, 0vw)
 }
 .cloud1,.cloud{
-    width: 100vw;
+    width: 101vw;
     bottom: 0;
+    filter: sepia(1);
 }
 
 #idbg{
@@ -132,7 +150,7 @@ body{
     z-index: 5;
     bottom: 5.5vw;
     width: 10vw;
-    left: 178vw;
+    left: 278vw;
 }
 #cacblock2{
     position: absolute;
@@ -175,7 +193,7 @@ body{
     width: 6vw;
     height: 8vw;
     z-index: 5;
-    left: 20px;
+    left: 7vw;
     background-image: url('./img/jump/f1.webp');
     background-size: 100% 100%;
     transform :translate(0vw, 0vw)
@@ -230,11 +248,11 @@ body{
     100%{filter: brightness(1);transform: scale(1)}
 }
 @keyframes bird{
-    0%{transform: translate(0vw, -0vw) rotateY(0deg); }
-    49%{transform: translate(100vw, -0vw) rotateY(0deg);}
-    50%{transform: translate(100vw, -0vw) rotateY(180deg); }
-    99%{transform: translate(0vw, 0vw) rotateY(180deg); }
-    100%{transform: translate(0vw, 0vw)rotateY(0deg); }
+    0%{transform: translate(0vw, -29vw) rotateY(0deg); }
+    49%{transform: translate(100vw, -25vw) rotateY(0deg);}
+    50%{transform: translate(100vw, -23vw) rotateY(180deg); }
+    99%{transform: translate(0vw, -26vw) rotateY(180deg); }
+    100%{transform: translate(0vw, -29vw)rotateY(0deg); }
 }
 #bird{
     position: relative;
@@ -242,8 +260,7 @@ body{
     width: 5vw;
     top: -8vw;
     left: 0vw;
-   /* animation: bird 10000ms linear infinite; */
-    display:none;
+    animation: bird 10000ms linear infinite;
 }
 @keyframes opps{
     0%{    filter: hue-rotate(0deg);}
@@ -308,4 +325,8 @@ body{
     right: 21vw;
     bottom: 7vw;
     transform: skewY(11deg);
+}
+@keyframes over{
+    50%{transform: translate(0vw, -7vw);}
+    100%{transform: translate(0vw,  14vw);}
 }
